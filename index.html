@@ -165,47 +165,50 @@
     <div class="header-title">Let our data solutions innovate your enterprise processes</div>
   </div>
 
-  <!-- Embed External HTML -->
-  <iframe id="embeddedPage" src="https://mgsp9.github.io/FrontPage/" style="width: 100%; border: none;"></iframe>
-
   <!-- Process Flow -->
   <div class="process-container" id="process-container">
-    <div class="hex">Scripting
+    <div class="hex">
+      Scripting
       <div class="stars">
         <span class="star">★</span>
         <span class="star">★</span>
         <span class="star">★</span>
       </div>
     </div>
-    <div class="hex">Data Modelling
+    <div class="hex">
+      Data Modelling
       <div class="stars">
         <span class="star">★</span>
         <span class="star">★</span>
         <span class="star">★</span>
       </div>
     </div>
-    <div class="hex middle">Data Architecture
+    <div class="hex middle">
+      Data Architecture
       <div class="stars">
         <span class="star">★</span>
         <span class="star">★</span>
         <span class="star">★</span>
       </div>
     </div>
-    <div class="hex middle">Process Automation
+    <div class="hex middle">
+      Process Automation
       <div class="stars">
         <span class="star">★</span>
         <span class="star">★</span>
         <span class="star">★</span>
       </div>
     </div>
-    <div class="hex">Process Integration
+    <div class="hex">
+      Process Integration
       <div class="stars">
         <span class="star">★</span>
         <span class="star">★</span>
         <span class="star">★</span>
       </div>
     </div>
-    <div class="hex">Process Streamlining
+    <div class="hex">
+      Process Streamlining
       <div class="stars">
         <span class="star">★</span>
         <span class="star">★</span>
@@ -214,14 +217,66 @@
     </div>
   </div>
 
+  <!-- Subtitle Container -->
+  <div class="subtext-container" id="subtext-container"></div>
+
+  <!-- Call-to-Action Buttons -->
+  <div class="button-container">
+    <button class="cta-button" onclick="redirectToPage1()">Learn More</button>
+    <button class="cta-button" onclick="redirectToPage2()">Get Started</button>
+  </div>
+
   <script>
-    // Adjust iframe height dynamically
-    window.addEventListener("message", (event) => {
-      if (event.origin === "https://mgsp9.github.io") {
-        const iframe = document.getElementById("embeddedPage");
-        iframe.style.height = event.data + "px";
-      }
-    });
+    const hexes = document.querySelectorAll('.hex');
+    const subtextContainer = document.getElementById('subtext-container');
+
+    // Descriptions for each hexagon
+    const descriptions = [
+      'Scripting: The foundation of operational excellence.',
+      'Data Modelling: Structuring data for powerful insights.',
+      'Data Architecture: Designing systems for scalability.',
+      'Process Automation: Streamlining workflows with technology.',
+      'Process Integration: Bringing systems together seamlessly.',
+      'Process Streamlining: Simplifying processes for efficiency.'
+    ];
+
+    let currentIndex = 0;
+
+    setTimeout(() => {
+      subtextContainer.style.display = 'block'; // Show the subtitle container when the animation starts
+      setInterval(() => {
+        hexes.forEach((hex, index) => {
+          hex.classList.remove('active', 'right');
+          if (index === currentIndex) {
+            hex.classList.add('active');
+          }
+        });
+
+        const newLine = document.createElement('div');
+        newLine.className = 'subtext-line';
+        newLine.innerText = descriptions[currentIndex];
+        subtextContainer.prepend(newLine);
+
+        const lines = subtextContainer.querySelectorAll('.subtext-line');
+        lines.forEach((line, index) => {
+          if (index > 3) {
+            line.remove();
+          } else if (index > 0) {
+            line.classList.add('faded');
+          }
+        });
+
+        currentIndex = (currentIndex + 1) % hexes.length;
+      }, 3000);
+    }, 5000); // Delay matches the typing animation duration (5s)
+
+    function redirectToPage1() {
+      alert('Redirecting to Learn More page...');
+    }
+
+    function redirectToPage2() {
+      alert('Redirecting to Get Started page...');
+    }
   </script>
 </body>
 </html>
