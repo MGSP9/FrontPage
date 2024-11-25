@@ -1,1 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Hexagon Layout</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: transparent;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      overflow: hidden;
+    }
 
+    .hexagon-container {
+      position: relative;
+      width: 90%; /* Adjusts dynamically with the container */
+      max-width: 800px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap; /* Allows hexagons to adjust to screen width */
+    }
+
+    .hexagon {
+      display: flex;
+      gap: 2%; /* Adjusts spacing dynamically */
+    }
+
+    .hex {
+      position: relative;
+      width: 10vw; /* Scales relative to the viewport width */
+      height: 11.5vw;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      background-color: #b8c0cc;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1.2vw;
+      font-weight: bold;
+      color: #fff;
+      transition: background-color 0.3s ease, transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .hex.active {
+      background-color: #51909c;
+      transform: scale(1.1);
+    }
+
+    .hex:hover {
+      background-color: #78bcc4;
+    }
+
+    .center {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 12vw;
+      height: 13.8vw;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      background-color: #51909c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      font-size: 1.4vw;
+      font-weight: bold;
+      z-index: 10;
+    }
+
+    .subtext {
+      margin-top: 20px;
+      text-align: center;
+      font-size: 1.5vw;
+      color: #78bcc4;
+      max-width: 90%;
+    }
+
+    button {
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #51909c;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #78bcc4;
+    }
+  </style>
+</head>
+<body>
+  <div class="hexagon-container">
+    <div class="center">A</div>
+    <div class="hexagon">
+      <div class="hex">Engage</div>
+      <div class="hex">Comply</div>
+      <div class="hex">Strategise</div>
+      <div class="hex">Enhance</div>
+      <div class="hex">Deliver</div>
+      <div class="hex">Growth</div>
+    </div>
+  </div>
+  <div class="subtext">Engage: Building connections with your audience.</div>
+  <button onclick="redirect()">Learn More</button>
+
+  <script>
+    const hexes = document.querySelectorAll('.hex');
+    const subtext = document.querySelector('.subtext');
+    const descriptions = {
+      Engage: 'Building connections with your audience.',
+      Comply: 'Ensuring compliance with standards and regulations.',
+      Strategise: 'Developing innovative strategies for success.',
+      Enhance: 'Improving systems and processes.',
+      Deliver: 'Providing consistent and reliable solutions.',
+      Growth: 'Fostering growth and development.'
+    };
+    let activeIndex = 0;
+
+    function rotateHexes() {
+      hexes.forEach((hex, index) => {
+        hex.classList.remove('active');
+        if (index === activeIndex) {
+          hex.classList.add('active');
+          subtext.innerText = `${hex.innerText}: ${descriptions[hex.innerText]}`;
+        }
+      });
+      activeIndex = (activeIndex + 1) % hexes.length;
+    }
+
+    setInterval(rotateHexes, 3000);
+
+    function redirect() {
+      const activeHex = document.querySelector('.hex.active');
+      const title = activeHex ? activeHex.innerText : 'Engage';
+      alert(`Redirecting to more information about: ${title}`);
+      // Example: window.location.href = `/${title.toLowerCase()}`;
+    }
+  </script>
+</body>
+</html>
