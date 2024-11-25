@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Responsive Hexagon Layout</title>
+  <title>Horizontal Process Flow</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -17,36 +17,37 @@
       overflow: hidden;
     }
 
-    .hexagon-container {
+    .process-container {
       position: relative;
-      width: 90%; /* Adjusts dynamically with the container */
-      max-width: 800px;
+      width: 90%;
+      max-width: 1200px;
       display: flex;
       justify-content: center;
       align-items: center;
-      flex-wrap: wrap; /* Allows hexagons to adjust to screen width */
     }
 
-    .hexagon {
+    .step {
+      position: relative;
       display: flex;
-      gap: 2%; /* Adjusts spacing dynamically */
+      align-items: center;
     }
 
     .hex {
       position: relative;
-      width: 10vw; /* Scales relative to the viewport width */
-      height: 11.5vw;
+      width: 120px;
+      height: 138px;
       clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
       background-color: #b8c0cc;
       text-align: center;
       display: flex;
       justify-content: center;
       align-items: center;
-      font-size: 1.2vw;
+      font-size: 14px;
       font-weight: bold;
       color: #fff;
       transition: background-color 0.3s ease, transform 0.3s ease;
       cursor: pointer;
+      z-index: 1;
     }
 
     .hex.active {
@@ -58,28 +59,31 @@
       background-color: #78bcc4;
     }
 
-    .center {
+    .arrow {
+      position: relative;
+      width: 80px;
+      height: 4px;
+      background-color: #78bcc4;
+      margin: 0 -5px;
+      z-index: 0;
+    }
+
+    .arrow::after {
+      content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: 12vw;
-      height: 13.8vw;
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
-      background-color: #51909c;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      color: white;
-      font-size: 1.4vw;
-      font-weight: bold;
-      z-index: 10;
+      top: -5px;
+      right: -8px;
+      width: 0;
+      height: 0;
+      border-style: solid;
+      border-width: 8px 0 8px 12px;
+      border-color: transparent transparent transparent #78bcc4;
     }
 
     .subtext {
       margin-top: 20px;
       text-align: center;
-      font-size: 1.5vw;
+      font-size: 18px;
       color: #78bcc4;
       max-width: 90%;
     }
@@ -101,17 +105,32 @@
   </style>
 </head>
 <body>
-  <div class="hexagon-container">
-    <div class="center">A</div>
-    <div class="hexagon">
+  <div class="process-container">
+    <div class="step">
       <div class="hex">Engage</div>
+      <div class="arrow"></div>
+    </div>
+    <div class="step">
       <div class="hex">Comply</div>
+      <div class="arrow"></div>
+    </div>
+    <div class="step">
       <div class="hex">Strategise</div>
+      <div class="arrow"></div>
+    </div>
+    <div class="step">
       <div class="hex">Enhance</div>
+      <div class="arrow"></div>
+    </div>
+    <div class="step">
       <div class="hex">Deliver</div>
+      <div class="arrow"></div>
+    </div>
+    <div class="step">
       <div class="hex">Growth</div>
     </div>
   </div>
+
   <div class="subtext">Engage: Building connections with your audience.</div>
   <button onclick="redirect()">Learn More</button>
 
