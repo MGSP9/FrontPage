@@ -13,10 +13,11 @@
       align-items: center;
       justify-content: center;
       min-height: 100vh;
+      padding: 20px;
     }
 
     .container {
-      width: 700px; /* Restrict content width */
+      width: 600px; /* Restrict content width */
       margin: 0 auto;
     }
 
@@ -24,12 +25,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 60px;
+      margin-bottom: 40px;
     }
 
     .header-title {
       font-family: monospace;
-      font-size: 32px; /* Reduced by 20% from 40px */
+      font-size: 16px; /* Reduced to half of 32px */
       font-weight: bold;
       color: #333;
       white-space: nowrap;
@@ -58,19 +59,16 @@
 
     .process-container {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 45px;
+      flex-direction: column;
+      gap: 30px; /* Spacing between squares */
       margin-bottom: 30px;
     }
 
-    .hex {
-      width: 100px;
-      height: 200px; /* Increased height for vertical orientation */
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    .square {
+      width: 100%;
+      height: 100px; /* Square dimensions */
       background-color: #b8c0cc;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
       text-align: center;
@@ -80,26 +78,21 @@
       transition: background-color 0.3s ease, transform 0.3s ease;
     }
 
-    .hex.middle {
-      width: 150px;
-      height: 300px; /* Taller middle elements for emphasis */
+    .square.middle {
+      height: 150px; /* Taller square for emphasis */
       font-size: 18px;
     }
 
-    .hex.active {
+    .square.active {
       background-color: #51909c;
       transform: scale(1.1);
-    }
-
-    .hex.active.right {
-      background-color: #78bcc4;
     }
 
     .subtext-container {
       margin-top: 45px;
       width: 100%;
       font-family: monospace;
-      font-size: 16px;
+      font-size: 14px;
       background: #222;
       color: #eee;
       padding: 15px;
@@ -120,7 +113,7 @@
     }
 
     .button-container {
-      margin-top: 60px;
+      margin-top: 40px;
       display: flex;
       justify-content: center;
       gap: 20px;
@@ -128,7 +121,7 @@
 
     .cta-button {
       padding: 10px 20px;
-      font-size: 16px;
+      font-size: 14px;
       font-weight: bold;
       color: white;
       background-color: #51909c;
@@ -152,12 +145,12 @@
 
     <!-- Process Flow -->
     <div class="process-container" id="process-container">
-      <div class="hex">Scripting</div>
-      <div class="hex">Data Modelling</div>
-      <div class="hex middle">Data Architecture</div>
-      <div class="hex middle">Process Automation</div>
-      <div class="hex">Process Integration</div>
-      <div class="hex">Process Streamlining</div>
+      <div class="square">Scripting</div>
+      <div class="square">Data Modelling</div>
+      <div class="square middle">Data Architecture</div>
+      <div class="square middle">Process Automation</div>
+      <div class="square">Process Integration</div>
+      <div class="square">Process Streamlining</div>
     </div>
 
     <!-- Subtitle Container -->
@@ -171,10 +164,10 @@
   </div>
 
   <script>
-    const hexes = document.querySelectorAll('.hex');
+    const squares = document.querySelectorAll('.square');
     const subtextContainer = document.getElementById('subtext-container');
 
-    // Descriptions for each hexagon
+    // Descriptions for each square
     const descriptions = [
       'Scripting: The foundation of operational excellence.',
       'Data Modelling: Structuring data for powerful insights.',
@@ -189,10 +182,10 @@
     setTimeout(() => {
       subtextContainer.style.display = 'block'; // Show the subtitle container when the animation starts
       setInterval(() => {
-        hexes.forEach((hex, index) => {
-          hex.classList.remove('active', 'right');
+        squares.forEach((square, index) => {
+          square.classList.remove('active');
           if (index === currentIndex) {
-            hex.classList.add('active');
+            square.classList.add('active');
           }
         });
 
@@ -210,7 +203,7 @@
           }
         });
 
-        currentIndex = (currentIndex + 1) % hexes.length;
+        currentIndex = (currentIndex + 1) % squares.length;
       }, 3000);
     }, 5000);
 
