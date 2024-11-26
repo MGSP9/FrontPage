@@ -1,100 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <!-- Meta Tags -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- Title -->
   <title>Modern Hexagonal Process Flow</title>
+
+  <!-- Styles -->
   <style>
+    /* Global Styles */
     body {
       font-family: Arial, sans-serif;
       margin: 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      min-height: 100vh;
       padding: 20px;
-      background: #78bcc4; /* Set page background color */
+      background: #78bcc4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
     }
 
     .container {
-      width: 700px; /* Restrict content width */
+      max-width: 700px;
+      width: 100%;
       margin: 0 auto;
       display: flex;
       flex-direction: column;
       align-items: center;
     }
 
+    /* Header */
     .header {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 40px;
       text-align: center;
+      margin-bottom: 40px;
     }
 
     .header-title {
       font-family: monospace;
-      font-size: 16px; /* Reduced to half of 32px */
+      font-size: 2rem;
       font-weight: bold;
-      color: #fff; /* White text for better contrast */
+      color: #fff;
       white-space: nowrap;
       overflow: hidden;
       border-right: 2px solid #51909c;
       animation: typing 5s steps(60, end), blink 0.5s step-end infinite alternate;
     }
 
+    /* Typing Animation */
     @keyframes typing {
-      from {
-        width: 0;
-      }
-      to {
-        width: 100%;
-      }
+      from { width: 0; }
+      to { width: 100%; }
     }
 
     @keyframes blink {
-      from {
-        border-right-color: #51909c;
-      }
-      to {
-        border-right-color: transparent;
-      }
+      from { border-right-color: #51909c; }
+      to { border-right-color: transparent; }
     }
 
+    /* Process Container */
     .process-container {
       display: grid;
-      grid-template-columns: repeat(3, 1fr); /* Three hexagons per row */
-      gap: 20px; /* Spacing between hexagons */
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 20px;
+      width: 100%;
       justify-items: center;
       margin-bottom: 30px;
     }
 
+    /* Hexagon */
     .hex {
-      width: 120px;
-      height: 140px;
+      width: 100%;
+      max-width: 120px;
+      aspect-ratio: 1 / 1.15;
       clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      background: linear-gradient(135deg, #68dbe8 50%, #2e2f31 50%);
       display: flex;
       justify-content: center;
       align-items: center;
       text-align: center;
-      font-size: 14px;
+      font-size: 1rem;
       font-weight: bold;
-      color: #51909c; /* Text color for hexagons */
+      color: #51909c;
       padding: 10px;
-      border: 1px solid #ddd;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      background: linear-gradient(135deg, #68dbe8 50%, #2e2f31 50%);
       position: relative;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     }
 
-    .hex:after {
+    .hex::after {
       content: "";
       position: absolute;
       width: 90%;
       height: 90%;
-      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      clip-path: inherit;
       background: #f1f1f1;
       z-index: -1;
       top: 5px;
@@ -112,11 +112,12 @@
       color: #ffffff;
     }
 
+    /* Subtext */
     .subtext-container {
       margin-top: 45px;
       width: 100%;
       font-family: monospace;
-      font-size: 14px;
+      font-size: 1rem;
       background: #222;
       color: #eee;
       padding: 15px;
@@ -136,16 +137,18 @@
       opacity: 0.3;
     }
 
+    /* Buttons */
     .button-container {
       margin-top: 40px;
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       gap: 20px;
     }
 
     .cta-button {
       padding: 10px 20px;
-      font-size: 14px;
+      font-size: 1rem;
       font-weight: bold;
       color: white;
       background-color: #51909c;
@@ -158,6 +161,33 @@
     .cta-button:hover {
       background-color: #68dbe8;
       transform: scale(1.05);
+    }
+
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .header-title {
+        font-size: 1.5rem;
+      }
+
+      .cta-button {
+        font-size: 0.9rem;
+        padding: 8px 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header-title {
+        font-size: 1.2rem;
+      }
+
+      .cta-button {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+      }
+
+      .hex {
+        max-width: 100px;
+      }
     }
   </style>
 </head>
@@ -188,6 +218,7 @@
     </div>
   </div>
 
+  <!-- Scripts -->
   <script>
     const hexes = document.querySelectorAll('.hex');
     const subtextContainer = document.getElementById('subtext-container');
@@ -205,13 +236,10 @@
     let currentIndex = 0;
 
     setTimeout(() => {
-      subtextContainer.style.display = 'block'; // Show the subtitle container when the animation starts
+      subtextContainer.style.display = 'block';
       setInterval(() => {
         hexes.forEach((hex, index) => {
-          hex.classList.remove('active');
-          if (index === currentIndex) {
-            hex.classList.add('active');
-          }
+          hex.classList.toggle('active', index === currentIndex);
         });
 
         const newLine = document.createElement('div');
@@ -233,11 +261,11 @@
     }, 5000);
 
     function redirectToPage1() {
-      alert('Redirecting to Learn More page...');
+      window.location.href = 'learn-more.html'; // Replace with your actual URL
     }
 
     function redirectToPage2() {
-      alert('Redirecting to Get Started page...');
+      window.location.href = 'get-started.html'; // Replace with your actual URL
     }
   </script>
 </body>
