@@ -19,7 +19,8 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      min-height: 100vh;
+      height: 100vh; /* Ensure body fills the viewport height */
+      overflow: hidden; /* Prevent scrollbars */
     }
 
     .container {
@@ -34,12 +35,12 @@
     /* Header */
     .header {
       text-align: center;
-      margin-bottom: 40px;
+      margin-bottom: 20px;
     }
 
     .header-title {
       font-family: monospace;
-      font-size: 2rem;
+      font-size: 1.5rem;
       font-weight: bold;
       color: #fff;
       white-space: nowrap;
@@ -62,11 +63,11 @@
     /* Process Container */
     .process-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      grid-template-columns: repeat(3, 1fr); /* Three hexagons per row */
       gap: 20px;
       width: 100%;
       justify-items: center;
-      margin-bottom: 30px;
+      margin-bottom: 20px;
     }
 
     /* Hexagon */
@@ -114,7 +115,7 @@
 
     /* Subtext */
     .subtext-container {
-      margin-top: 45px;
+      margin-top: 20px;
       width: 100%;
       font-family: monospace;
       font-size: 1rem;
@@ -139,7 +140,7 @@
 
     /* Buttons */
     .button-container {
-      margin-top: 40px;
+      margin-top: 20px;
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
@@ -163,30 +164,29 @@
       transform: scale(1.05);
     }
 
-    /* Responsive Styles */
+    /* Adjustments for Smaller Screens */
     @media (max-width: 768px) {
       .header-title {
-        font-size: 1.5rem;
+        font-size: 1.2rem;
+      }
+
+      .hex {
+        max-width: 100px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .process-container {
+        grid-template-columns: repeat(2, 1fr); /* Two columns on small screens */
+      }
+
+      .hex {
+        max-width: 80px;
       }
 
       .cta-button {
         font-size: 0.9rem;
         padding: 8px 16px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .header-title {
-        font-size: 1.2rem;
-      }
-
-      .cta-button {
-        font-size: 0.8rem;
-        padding: 6px 12px;
-      }
-
-      .hex {
-        max-width: 100px;
       }
     }
   </style>
